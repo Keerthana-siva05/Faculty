@@ -1,0 +1,185 @@
+/* Faculty Dashboard - Professional Styling */
+
+/* Main container */
+.dashboard-container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 160vh;
+  width: 80vw;
+  overflow:hiddden;
+  background: #f5f5f5;
+  margin-left:10px;
+  margin-top: 10px;
+  
+}
+/* Sidebar */
+.dashboard-container .sidebar {
+  width: 200px;
+  background-color: #34495e;
+  flex-shrink: 0;
+}
+/* Main content area */
+
+   .main-content {
+    flex: 1;
+    margin-left: 0px; /* To prevent hiding behind the sidebar */
+    display: flex;
+    flex-direction: column;
+    margin-top:20px;
+    margin-right:20px;
+  }
+/* Header */
+.header {
+  background: #002b5b; /* Deep Blue */
+  color: white;
+  padding: 15px 20px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Welcome Section */
+.welcome {
+  background: #1E3A8A; /* Change this to any color you prefer */
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+.welcome h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+  color:white;
+}
+
+.welcome p {
+  font-size: 16px;
+}
+
+/* Stats Section */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #08257c;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Recent Activities */
+.recent {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+}
+
+.recent h3 {
+  color: #08257c;
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.recent ul {
+  list-style: none;
+  padding: 0;
+}
+
+.recent li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+.recent li:last-child {
+  border-bottom: none;
+}
+
+.recent li::before {
+  content: "✔️";
+  margin-right: 8px;
+  color: #08257c;
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #d9534f;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  width: 100px;
+  margin: 20px auto;
+  transition: background 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+  background: #c9302c;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+
+  .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .stats {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

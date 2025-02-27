@@ -1,0 +1,219 @@
+/* Attendance Container */
+.attendance-container {
+  width: 95%;
+  max-width: 1200px;
+  margin: 40px auto;
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  margin-top: 150px;
+}
+
+h2 {
+  font-size: 26px;
+  font-weight: 600;
+  color: #1d3557;
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Buttons */
+button {
+  padding: 12px 18px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 8px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+
+.download-btn {
+  background: #457b9d;
+  color: white;
+}
+
+.download-btn:hover {
+  background: #1d3557;
+}
+
+.save-btn {
+  background: #2a9d8f;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #21867a;
+}
+
+/* Table Styling */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 14px;
+  border: 1px solid #dee2e6;
+  text-align: center;
+}
+
+th {
+  background: #1d3557;
+  color: white;
+  font-weight: 600;
+}
+
+td {
+  background: #ffffff;
+}
+
+td:nth-child(odd) {
+  background: #f1f3f5;
+}
+
+td input {
+  width: 100%;  /* Ensures input fills the cell */
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* Increase width for Name and Register Number fields */
+td input[type="text"] {
+  width: 150px; /* Adjust the width */
+  text-align: left;
+}
+td input[type="number"] {
+  width: 50px; /* Adjust the width */
+  text-align: left;
+}
+/* Highlight Attendance Percentage */
+.highlight {
+  font-weight: bold;
+  color: #e63946;
+  border-radius: 6px;
+}
+
+/* Hover Effect */
+tr:hover {
+  background: #e9f5ff;
+  transition: 0.3s ease;
+}
+
+/* Add Student Form */
+.add-student-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 20px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-student-form input {
+  width: 150px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+  transition: 0.3s ease-in-out;
+}
+
+.add-student-form input:focus {
+  border-color: #457b9d;
+  outline: none;
+  box-shadow: 0 0 6px rgba(69, 123, 157, 0.5);
+}
+
+.add-btn {
+  background: #e63946;
+  color: white;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.add-btn:hover {
+  background: #b71c1c;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  td input {
+      width: 90%;
+  }
+}
+/* Month and Year Selection Container */
+.month-year-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+.month-year-selection label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1d3557;
+}
+
+/* Dropdown Styles */
+.month-year-selection select {
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #1d3557;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.month-year-selection select:focus {
+  border-color: #457b9d;
+  outline: none;
+  box-shadow: 0 0 6px rgba(69, 123, 157, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .month-year-selection {
+    flex-direction: column;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .month-year-selection label {
+    font-size: 14px;
+  }
+
+  .month-year-selection select {
+    width: 100%;
+    font-size: 14px;
+  }
+}

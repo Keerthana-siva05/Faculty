@@ -1,0 +1,113 @@
+/* Sidebar styles */
+nav {
+    width: 250px; /* Sidebar width */
+    background-color: #333333; /* Dark Gray */
+    position: fixed;
+    top: 140px; /* Adjust this value to match the height of your header */
+    left: 0;
+    padding-top: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    overflow-y: auto;
+    color: #fff; /* White text for better contrast */
+    transition: width 0.3s ease;
+    height: calc(100vh - 80px); /* Adjust to fill the available space between header and footer */
+    bottom: 0; /* Ensures it stretches till the bottom of the viewport */
+  }
+  
+  /* Navigation links container */
+  .nav-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  /* Style for each list item */
+  .nav-links li {
+    margin-bottom: 20px;
+  }
+  
+  /* Button for each section in the sidebar */
+  .nav-links li button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .nav-links li button:hover {
+    background-color: #4b4b91; /* Header color or slightly lighter shade */
+  }
+  
+  /* Dropdown styles */
+  .dropdown {
+    display: none;
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 20px;
+  }
+  
+  /* When the dropdown is visible */
+  .dropdown button {
+    background-color: transparent;
+    color: #fff;
+    border: none;
+    width: 100%;
+    text-align: left;
+    padding: 8px 20px;
+    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  .dropdown button:hover {
+    background-color: #555; /* Slightly lighter gray for dropdown items */
+  }
+  
+  /* Show the dropdown when active */
+  .nav-links li.active .dropdown {
+    display: block;
+  }
+  
+  /* Active link styling */
+  .nav-links li.active button {
+    background-color: #4b4b91; /* Change background when active */
+    color: white;
+  }
+  
+  /* Sidebar collapse (optional, if you want collapsible sidebar) */
+  .nav-links li button:focus {
+    outline: none;
+    background-color: #555; /* Focus effect for buttons */
+  }
+  
+  /* Styling for contact us button */
+  .nav-links li button.contact {
+    background-color: #4b4b91;
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 20px;
+  }
+  
+  /* Active state for dropdown button */
+  .nav-links li button:focus {
+    background-color: #555; /* Focus effect */
+  }
+  
+  /* Media Query for responsiveness */
+  @media (max-width: 768px) {
+    nav {
+      width: 200px; /* Smaller sidebar on mobile */
+      top: 60px; /* Adjusted for smaller header */
+    }
+  
+    .nav-links li button {
+      font-size: 14px; /* Adjust font size for mobile */
+    }
+  }
+  
