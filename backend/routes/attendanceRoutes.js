@@ -1,112 +1,58 @@
+// attendanceRoutes.js
 import express from "express";
-import Attendance from "../models/attendanceModel.js"; // Ensure correct model import
+import Attendance from "../models/attendanceModel.js"; // Assuming you have an Attendance model
+import Student from "../models/Student.js"; // Assuming you have a Student model
 
 const router = express.Router();
 
-// ✅ Save or Update Attendance (Upsert)
-router.post("/", async (req, res) => {
+router.get("/students", async (req, res) => {
   try {
-    console.log("Received Attendance Data:", req.body); // Debugging
-    
-    const { month, year, attendanceData } = req.body;
-    
-    if (!month || !year || !Array.isArray(attendanceData)) {
-      console.error("Invalid data format:", req.body);
-      return res.status(400).json({ message: "Invalid data format!" });
-    }
-
-    for (const record of attendanceData) {
-      await Attendance.findOneAndUpdate(
-        { regNumber: record.regNumber, month, year },
-        {
-          $set: {
-            name: record.name,
-            totalClasses: record.totalClasses,
-            attended: record.attended,
-            percentage: ((record.attended / record.totalClasses) * 100).toFixed(2),
-            month,
-            year,
-          },
-        },
-        { upsert: true, new: true }
-      );
-    }
-
-    res.status(200).json({ message: "Attendance saved successfully!" });
-  } catch (error) {
-    console.error("Error saving attendance:", error);
-    res.status(500).json({ message: "Error saving attendance", error });
+    const { course, year } = req.query;
+    const students = await Student.find({ course, year });
+    res.json(students);
+  } catch (err) {
+    res.status(500).json({ message: "Error fetching students", error: err.message });
   }
 });
 
-
-// ✅ Get Attendance Records by Month & Year
-router.get("/", async (req, res) => {
+router.post("/save", async (req, res) => {
   try {
-    const { month, year } = req.query;
-
-    if (!month || !year) {
-      return res.status(400).json({ message: "Month and year are required!" });
+    const { course, year, month, students } = req.body;
+    if (!students.every(s => s.regNumber)) {
+      return res.status(400).json({ message: "All students must have a registration number." });
     }
 
-    const attendanceRecords = await Attendance.find({ month, year });
+    console.log("Saving attendance for:", { course, year, month, students });
 
-    res.status(200).json(attendanceRecords);
-  } catch (error) {
-    console.error("Error fetching attendance records:", error);
-    res.status(500).json({ message: "Error fetching attendance records", error });
+    let existingRecord = await Attendance.findOne({ course, year, month });
+
+    if (existingRecord) {
+      console.log(`Updating existing attendance record for ${course} - ${year} - ${month}`);
+
+      students.forEach((newStudent) => {
+        const existingStudent = existingRecord.students.find((s) => s.regNumber === newStudent.regNumber);
+        if (existingStudent) {
+          existingStudent.totalClasses = newStudent.totalClasses;
+          existingStudent.attended = newStudent.attended;
+        } else {
+          existingRecord.students.push(newStudent);
+        }
+      });
+
+      await existingRecord.save();
+      return res.json({ message: "Attendance updated successfully" });
+    } else {
+      console.log("Creating new attendance record");
+      const newAttendance = new Attendance({ course, year, month, students });
+      await newAttendance.save();
+      return res.json({ message: "Attendance saved successfully" });
+    }
+
+  } catch (err) {
+    console.error("Error saving attendance:", err.message);
+    res.status(500).json({ message: "Error saving attendance", error: err.message });
   }
 });
 
-// ✅ Delete an Attendance Record by Reg Number, Month & Year
-router.delete("/:regNumber", async (req, res) => {
-  try {
-    const { regNumber } = req.params;
-    console.log("Deleting record with regNumber:", regNumber); // Debugging
-
-    const deletedRecord = await Attendance.findOneAndDelete({ regNumber });
-
-    if (!deletedRecord) {
-      return res.status(404).json({ message: "Record not found!" });
-    }
-
-    res.status(200).json({ message: "Attendance record deleted successfully!" });
-  } catch (error) {
-    console.error("Error deleting attendance record:", error);
-    res.status(500).json({ message: "Error deleting attendance record", error });
-  }
-});
-
-
-
-
-
-
-// ✅ Add a New Attendance Entry
-router.post("/add", async (req, res) => {
-  try {
-    const { regNumber, name, totalClasses, attended, month, year } = req.body;
-
-    if (!regNumber || !name || !totalClasses || !attended || !month || !year) {
-      return res.status(400).json({ message: "All fields are required!" });
-    }
-
-    const newAttendance = new Attendance({
-      regNumber,
-      name,
-      totalClasses,
-      attended,
-      percentage: ((attended / totalClasses) * 100).toFixed(2),
-      month,
-      year,
-    });
-
-    await newAttendance.save();
-    res.status(201).json({ message: "New attendance record added!" });
-  } catch (error) {
-    console.error("Error adding attendance record:", error);
-    res.status(500).json({ message: "Error adding attendance record", error });
-  }
-});
 
 export default router;
